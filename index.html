@@ -10,12 +10,24 @@
             color : black;
             display: flex;
             margin: 0;
-            height: 300px;
             align-items: center;
             justify-content: center;
             border-radius: 10px;
             font-size: 50px;
             width: auto;
+        }
+        #week {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        #week > div {
+            background-color: lightgray;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            text-align: center;
         }
     </style>
 </head>
@@ -23,5 +35,14 @@
     <header> Header </header>
     hello world<br>
     im changing something here
+    <div id="week">
+        <div id="monday"></div>
+        <div id="tuesday"></div>
+        <div id="wednesday"></div>
+        <div id="thursday"></div>
+        <div id="friday"></div>
+        <div id="saturday"></div>
+        <div id="sunday"></div>
+    </div>
 </body>
 </html>
