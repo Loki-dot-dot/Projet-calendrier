@@ -133,8 +133,11 @@
         if (startStr === todayStr) return 'bg-today-ongoing';
         if (endStr && startStr && todayStr >= startStr && todayStr <= endStr) return 'bg-today-ongoing';
 
-        if (idx === closestUpcomingIdx) return 'bg-upcoming';
-
+        const diffTime = startDate - today;
+        const diffDays = diffTime / (1000 * 60 * 60 * 24);
+        if (idx === closestUpcomingIdx && diffDays > 0 && diffDays <= 14) {
+          return 'bg-upcoming';
+        }
         return '';
       });
     }
@@ -149,7 +152,7 @@
         const events = await response.json();
         const classes = getEventStatusClasses(events);
 
-        tbody.innerHTML = ''; // Clear existing rows
+        tbody.innerHTML = '';
 
         events.forEach((event, i) => {
           const tr = document.createElement('tr');
