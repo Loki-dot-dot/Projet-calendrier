@@ -35,55 +35,113 @@
         padding: 10px;
         border-radius: 10px;
     }
-    .past { background: gray; }
-    .future { background: lightblue; }
-    .today { background: orange; }
-    .ongoing { background: green; }
-    .over { background: red; }
-    .upcoming { background: yellow; }
+    .bg-past {
+        background-color: lightgray;
+    }
+
+    .bg-today-ongoing {
+        background-color: lightgreen;
+    }
+
+    .bg-upcoming {
+        background-color: orange;
+    }
+
 
 </style>
 <script>
-fetch('Dates.json')
-  .then(res => res.json())
-  .then(events => {
-    const today = new Date();
-    today.setHours(0, 0, 0, 0); // normalize to midnight
+// Helper: format Date object to YYYY-MM-DD string
+function formatDate(d) {
+  return new Date(d).toISOString().split('T')[0];
+}
 
-    function normalizeDate(dateStr) {
-      const d = new Date(dateStr);
-      d.setHours(0, 0, 0, 0);
-      return d;
-    }
+// Helper: get start date of event (single date or range start)
+function getStartDate(event) {
+  if (typeof event.date === 'string') return new Date(event.date);
+  if (event.date.debut) return new Date(event.date.debut);
+  return null;
+}
 
-    events.forEach(event => {
-      const el = document.getElementById(event.id);
-      if (!el) return; // skip if no matching element
+// Helper: get end date of event (single date or range end)
+function getEndDate(event) {
+  if (typeof event.date === 'string') return new Date(event.date);
+  if (event.date.fin) return new Date(event.date.fin);
+  return null;
+}
 
-      // Remove all possible status classes
-      el.classList.remove("past", "future", "today", "ongoing", "over", "upcoming");
+// Main function to assign CSS classes
+function getEventStatusClasses(events) {
+  const today = new Date();
+  const todayStr = formatDate(today);
 
-      let status = "";
+  // Find all future events (startDate > today)
+  const futureEvents = events
+    .map((event, idx) => ({ event, idx, startDate: getStartDate(event) }))
+    .filter(({ startDate }) => startDate && formatDate(startDate) > todayStr);
 
-      if (typeof event.date === "string") {
-        const eventDate = normalizeDate(event.date);
+  // Sort future events ascending by startDate
+  futureEvents.sort((a, b) => a.startDate - b.startDate);
 
-        if (eventDate < today) status = "past";
-        else if (eventDate.getTime() === today.getTime()) status = "today";
-        else status = "future";
+  // Closest upcoming event index
+  const closestUpcomingIdx = futureEvents.length ? futureEvents[0].idx : null;
 
-      } else if (event.date.debut && event.date.fin) {
-        const start = normalizeDate(event.date.debut);
-        const end = normalizeDate(event.date.fin);
+  // Assign classes
+  return events.map((event, idx) => {
+    const startDate = getStartDate(event);
+    const endDate = getEndDate(event);
+    const startStr = startDate ? formatDate(startDate) : null;
+    const endStr = endDate ? formatDate(endDate) : null;
 
-        if (end < today) status = "over";
-        else if (start > today) status = "upcoming";
-        else if (start <= today && today <= end) status = "ongoing";
-      }
+    // Past
+    if (endStr && endStr < todayStr) return 'bg-past';
+    if (!endStr && startStr && startStr < todayStr) return 'bg-past';
 
-      el.classList.add(status);
-    });
+    // Today / ongoing
+    if (startStr === todayStr) return 'bg-today-ongoing';
+    if (endStr && startStr && todayStr >= startStr && todayStr <= endStr) return 'bg-today-ongoing';
+
+    // Upcoming: only closest upcoming event
+    if (idx === closestUpcomingIdx) return 'bg-upcoming';
+
+    return '';
   });
+}
+
+// Fetch the JSON file and render events inside a container element
+async function loadAndRenderEvents(containerSelector) {
+  const container = document.querySelector(containerSelector);
+  if (!container) {
+    console.error('Container element not found');
+    return;
+  }
+
+  try {
+    const response = await fetch('Dates.json');
+    if (!response.ok) throw new Error('Failed to fetch Dates.json');
+
+    const events = await response.json();
+    const classes = getEventStatusClasses(events);
+
+    container.innerHTML = ''; // clear loading or old content
+
+    events.forEach((event, i) => {
+      const el = document.createElement('div');
+      let dateDisplay = '';
+      if (typeof event.date === 'string') {
+        dateDisplay = event.date;
+      } else {
+        dateDisplay = `${event.date.debut} to ${event.date.fin}`;
+      }
+      el.textContent = `${event.evenement} (${dateDisplay})`;
+      if (classes[i]) el.classList.add(classes[i]);
+      container.appendChild(el);
+    });
+
+  } catch (error) {
+    container.textContent = `Error loading events: ${error.message}`;
+    console.error(error);
+  }
+}
 
 </script>
 <body>
@@ -107,6 +165,7 @@ fetch('Dates.json')
             </ul>
         </div>
     </nav>
+    <div id="events-container">
     <table border="black" cellspacing="0" id="table">
         <tr>
             <th>Evenement</th>
@@ -184,8 +243,9 @@ fetch('Dates.json')
             <td>1er Muharram 1448</td>
         </tr>
     </table>
+    </div>
     <footer class="container-fluid bg-secondary text-light text-center p-3">© 2025-2026 Calendrier OFPPT- Tous droits réservés.<a class="nav-link text-light fixed-bottom" href="#">À propos</a></li></footer>
-
+<script>loadAndRenderEvents('#events-container');</script>
 </body>
 </body>
 </html>
