@@ -1,0 +1,107 @@
+[
+  {
+    "evenement": "Aid Al Mawlid",
+    "jours": "02",
+    "date": {
+      "debut": "2025-09-04",
+      "fin": "2025-09-05"
+    },
+    "id":"event 1"
+  },
+  {
+    "evenement": "La Marche Verte",
+    "jours": "01",
+    "date": "2025-11-06",
+    "id":"event 2"
+  },
+  {
+    "evenement": "Fête de l'Indépendance",
+    "jours": "01",
+    "date": "2025-11-18",
+    "id":"event 3"
+  },
+  {
+    "evenement": "Vacances du 1er trimestre",
+    "jours": "08",
+    "date": {
+      "debut": "2025-12-08",
+      "fin": "2025-12-15"
+    },
+    "id":"event 4"
+  },
+  {
+    "evenement": "Nouvel an",
+    "jours": "01",
+    "date": "2026-01-01",
+    "id":"event 5"
+  },
+  {
+    "evenement": "Manifeste de l'indépendance",
+    "jours": "01",
+    "date": "2026-01-11",
+    "id":"event 6"
+  },
+  {
+    "evenement": "Nouvel an Amazigh",
+    "jours": "01",
+    "date": "2026-01-14",
+    "id":"event 7"
+  },
+  {
+    "evenement": "Vacances de la mi-année de formation",
+    "jours": "08",
+    "date": {
+      "debut": "2026-01-26",
+      "fin": "2026-02-02",
+    "id":"event 8"
+    }
+  },
+  {
+    "evenement": "Vacances du 2ème trimestre",
+    "jours": "08",
+    "date": {
+      "debut": "2026-03-16",
+      "fin": "2026-03-23",
+    "id":"event 9"
+    }
+  },
+  {
+    "evenement": "Aid Al Fitr",
+    "jours": "03 ou 04",
+    "date": {
+      "debut": "2026-04-10",
+      "fin": "2026-04-13",
+    "id":"event 10"
+    }
+  },
+  {
+    "evenement": "Fête du travail",
+    "jours": "01",
+    "date": "2026-05-01",
+    "id":"event 11"
+  },
+  {
+    "evenement": "Vacances du 3ème trimestre",
+    "jours": "08",
+    "date": {
+      "debut": "2026-05-04",
+      "fin": "2026-05-11"
+    },
+    "id":"event 12"
+  },
+  {
+    "evenement": "Aid Adha",
+    "jours": "04",
+    "date": {
+      "debut": "2026-05-25",
+      "fin": "2026-05-28"
+    },
+    "id":"event 13"
+  },
+  {
+    "evenement": "1er Muharram",
+    "jours": "01",
+    "date": "2026-06-16",
+    "id":"event 14"
+  }
+]
