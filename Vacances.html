@@ -26,7 +26,7 @@
         background-repeat: no-repeat;
         background-position: center;
     }
-    #table {
+    #events-container {
         margin: 50px auto;
         border-collapse: separate;
         width: 80%;
@@ -165,8 +165,7 @@ async function loadAndRenderEvents(containerSelector) {
             </ul>
         </div>
     </nav>
-    <div id="events-container">
-    <table border="black" cellspacing="0" id="table">
+    <table border="black" cellspacing="0" id="events-container">
         <tr>
             <th>Evenement</th>
             <th>Nombre de Jours</th>
@@ -243,7 +242,6 @@ async function loadAndRenderEvents(containerSelector) {
             <td>1er Muharram 1448</td>
         </tr>
     </table>
-    </div>
     <footer class="container-fluid bg-secondary text-light text-center p-3">© 2025-2026 Calendrier OFPPT- Tous droits réservés.<a class="nav-link text-light fixed-bottom" href="#">À propos</a></li></footer>
 <script>loadAndRenderEvents('#events-container');</script>
 </body>
