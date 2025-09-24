@@ -127,18 +127,23 @@
         const startStr = startDate ? formatDate(startDate) : null;
         const endStr = endDate ? formatDate(endDate) : null;
 
-        if (endStr && endStr < todayStr) return 'bg-past';
-        if (!endStr && startStr && startStr < todayStr) return 'bg-past';
+        
+        if (endDate && endDate < today) return 'bg-past';
+        if (!endDate && startDate && startDate < today) return 'bg-past';
 
-        if (startStr === todayStr) return 'bg-today-ongoing';
-        if (endStr && startStr && todayStr >= startStr && todayStr <= endStr) return 'bg-today-ongoing';
+        
+        if (startDate && startDate.toDateString() === today.toDateString()) return 'bg-today-ongoing';
+        if (endDate && startDate && today >= startDate && today <= endDate) return 'bg-today-ongoing';
 
+      
         const diffTime = startDate - today;
         const diffDays = diffTime / (1000 * 60 * 60 * 24);
         if (idx === closestUpcomingIdx && diffDays > 0 && diffDays <= 14) {
           return 'bg-upcoming';
         }
-        return '';
+
+return '';
+
       });
     }
 
