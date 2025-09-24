@@ -44,30 +44,41 @@
 
 </style>
 <script>
-    fetch('Dates.json')
+fetch('Dates.json')
   .then(res => res.json())
   .then(events => {
     const today = new Date();
+    today.setHours(0, 0, 0, 0); // normalize to midnight
+
+    function normalizeDate(dateStr) {
+      const d = new Date(dateStr);
+      d.setHours(0, 0, 0, 0);
+      return d;
+    }
 
     events.forEach(event => {
       const el = document.getElementById(event.id);
-      if (!el) return;
+      if (!el) return; // skip if no matching element
 
+      // Remove all possible status classes
       el.classList.remove("past", "future", "today", "ongoing", "over", "upcoming");
 
       let status = "";
 
       if (typeof event.date === "string") {
-        const d = new Date(event.date);
-        status = d < today ? "past" : d > today ? "future" : "today";
-      } else {
-        const start = new Date(event.date.debut);
-        const end = new Date(event.date.fin);
+        const eventDate = normalizeDate(event.date);
 
-        status =
-          end < today ? "over" :
-          start > today ? "upcoming" :
-          "ongoing";
+        if (eventDate < today) status = "past";
+        else if (eventDate.getTime() === today.getTime()) status = "today";
+        else status = "future";
+
+      } else if (event.date.debut && event.date.fin) {
+        const start = normalizeDate(event.date.debut);
+        const end = normalizeDate(event.date.fin);
+
+        if (end < today) status = "over";
+        else if (start > today) status = "upcoming";
+        else if (start <= today && today <= end) status = "ongoing";
       }
 
       el.classList.add(status);
