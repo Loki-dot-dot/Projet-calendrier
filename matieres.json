@@ -1,0 +1,171 @@
+[
+    {
+    "matiere":"Français",
+    "cours":"",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"EGTS202"
+},{
+    "matiere":"Anglais technique",
+    "cours":"",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"EGTS203"
+},{
+    "matiere":"Culture entrepreneuriale",
+    "cours":"",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"EGTS204"
+},{
+    "matiere":"Compétences comportementales",
+    "cours":"",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"EGTS205"
+},{
+    "matiere":"Entrepreneuriat-PIE 2",
+    "cours":"",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"EGTS208"
+},{
+    "matiere":"Culture et techniques avancées du numérique",
+    "cours":"",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"EGTSA206"
+},{
+    "matiere":"Préparation d'un projet web",
+    "cours":"https://ofppt.info/preparation-dun-projet-web/",
+    "jours":{
+        "lundi":true,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":true,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"M201"
+},{
+    "matiere":"Approche agile",
+    "cours":"https://ofppt.info/approche-agile/",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":true,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":true
+    },
+    "id":"M202"
+},{
+    "matiere":"Gestion des données",
+    "cours":"https://ofppt.info/gestion-des-donnees/",
+    "jours":{
+        "lundi":false,
+        "mardi":true,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":true,
+        "samedi":false
+    },
+    "id":"M203"
+},{
+    "matiere":"Développement front-end",
+    "cours":"https://ofppt.info/developpement-front-end/",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"M204"
+},{
+    "matiere":"Développement back-end",
+    "cours":"https://ofppt.info/developpement-back-end/",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"M205"
+},{
+    "matiere":"Création d'une application Cloud native",
+    "cours":"https://ofppt.info/creation-dune-application-cloud-native/",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"M206"
+},{
+    "matiere":"Projet de synthèse",
+    "cours":"",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"M207"
+},{
+    "matiere":"Intégration du milieu professionnel",
+    "cours":"",
+    "jours":{
+        "lundi":false,
+        "mardi":false,
+        "mercredi":false,
+        "jeudi":false,
+        "vendredi":false,
+        "samedi":false
+    },
+    "id":"M208"
+}
+]
