@@ -30,7 +30,7 @@
       margin: 50px auto;
       border-collapse: separate;
       width: 80%;
-      background-color: rgba(255, 255, 255, 0.9);
+      /*background-color: rgba(255, 255, 255, 0.9);*/
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       padding: 10px;
     }
@@ -61,6 +61,7 @@
       background-color: orange !important;
       color: rgb(190, 92, 0) !important;
     }
+    
 
   </style>
 </head>
@@ -88,7 +89,7 @@
     </div>
   </nav>
 
-  <table border="black" cellspacing="0" id="table" class="table table-bordered">
+  <table border="black" cellspacing="0" id="table" class="table table-dark">
     <thead>
       <tr>
         <th>Événement</th>
@@ -109,8 +110,8 @@
   </footer>
 
   <script>
-    function formatDate(d) {
-      return new Date(d).toISOString().split('T')[0];
+    function normalizeDate(d) {
+      return new Date(d.getFullYear(), d.getMonth(), d.getDate());
     }
 
     function getStartDate(event) {
@@ -126,44 +127,37 @@
     }
 
     function getEventStatusClasses(events) {
-      const today = new Date();
-      const todayStr = formatDate(today);
+      const today = normalizeDate(new Date());
 
       const futureEvents = events
         .map((event, idx) => ({ event, idx, startDate: getStartDate(event) }))
-        .filter(({ startDate }) => startDate && formatDate(startDate) > todayStr);
+        .filter(({ startDate }) => startDate && normalizeDate(startDate) > today);
 
       futureEvents.sort((a, b) => a.startDate - b.startDate);
 
       const closestUpcomingIdx = futureEvents.length ? futureEvents[0].idx : null;
 
       return events.map((event, idx) => {
-        const startDate = getStartDate(event);
-        const endDate = getEndDate(event);
-        const startStr = startDate ? formatDate(startDate) : null;
-        const endStr = endDate ? formatDate(endDate) : null;
+        let startDate = getStartDate(event);
+        let endDate = getEndDate(event);
 
-        
+        if (startDate) startDate = normalizeDate(startDate);
+        if (endDate) endDate = normalizeDate(endDate);
+
         if (endDate && endDate < today) return 'bg-past';
         if (!endDate && startDate && startDate < today) return 'bg-past';
 
-        
-        if (startDate && startDate.toDateString() === today.toDateString()) return 'bg-today-ongoing';
+        if (startDate && startDate.getTime() === today.getTime()) return 'bg-today-ongoing';
         if (endDate && startDate && today >= startDate && today <= endDate) return 'bg-today-ongoing';
 
-      
-        function getEventClass(startDate, idx, closestUpcomingIdx) {
-  const diffTime = startDate - new Date(); // difference in ms
-  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+        if (startDate) {
+          const diffDays = (startDate - today) / (1000 * 60 * 60 * 24);
+          if (idx === closestUpcomingIdx && diffDays > 0 && diffDays <= 14) {
+            return 'bg-upcoming';
+          }
+        }
 
-  if (idx === closestUpcomingIdx && diffDays > 0 && diffDays <= 14) {
-    return 'bg-upcoming';
-  }
-}
-
-
-return '';
-
+        return '';
       });
     }
 
