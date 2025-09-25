@@ -60,7 +60,7 @@
 
     .bg-upcoming td {
       background-color: orange !important;
-      color: darkorange !important;
+      color: rgb(190, 92, 0) !important;
     }
 
   </style>
@@ -152,11 +152,15 @@
         if (endDate && startDate && today >= startDate && today <= endDate) return 'bg-today-ongoing';
 
       
-        const diffTime = startDate - today;
-        const diffDays = diffTime / (1000 * 60 * 60 * 24);
-        if (idx === closestUpcomingIdx && diffDays > 0 && diffDays <= 14) {
-          return 'bg-upcoming';
-        }
+        function getEventClass(startDate, idx, closestUpcomingIdx) {
+  const diffTime = startDate - new Date(); // difference in ms
+  const diffDays = diffTime / (1000 * 60 * 60 * 24);
+
+  if (idx === closestUpcomingIdx && diffDays > 0 && diffDays <= 14) {
+    return 'bg-upcoming';
+  }
+}
+
 
 return '';
 
