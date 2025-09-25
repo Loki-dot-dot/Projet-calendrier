@@ -10,6 +10,12 @@
         "vendredi":false,
         "samedi":false
     },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
+    },
     "id":"EGTS202"
 },{
     "matiere":"Anglais technique",
@@ -21,6 +27,12 @@
         "jeudi":false,
         "vendredi":false,
         "samedi":false
+    },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
     },
     "id":"EGTS203"
 },{
@@ -34,6 +46,12 @@
         "vendredi":false,
         "samedi":false
     },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
+    },
     "id":"EGTS204"
 },{
     "matiere":"Compétences comportementales",
@@ -45,6 +63,12 @@
         "jeudi":false,
         "vendredi":false,
         "samedi":false
+    },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
     },
     "id":"EGTS205"
 },{
@@ -58,6 +82,12 @@
         "vendredi":false,
         "samedi":false
     },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
+    },
     "id":"EGTS208"
 },{
     "matiere":"Culture et techniques avancées du numérique",
@@ -69,6 +99,12 @@
         "jeudi":false,
         "vendredi":false,
         "samedi":false
+    },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
     },
     "id":"EGTSA206"
 },{
@@ -82,6 +118,12 @@
         "vendredi":false,
         "samedi":false
     },
+    "seances":{
+        "1":true,
+        "2":true,
+        "3":false,
+        "4":false
+    },
     "id":"M201"
 },{
     "matiere":"Approche agile",
@@ -93,6 +135,12 @@
         "jeudi":false,
         "vendredi":false,
         "samedi":true
+    },
+    "seances":{
+        "1":true,
+        "2":true,
+        "3":false,
+        "4":false
     },
     "id":"M202"
 },{
@@ -106,6 +154,12 @@
         "vendredi":true,
         "samedi":false
     },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":true,
+        "4":true
+    },
     "id":"M203"
 },{
     "matiere":"Développement front-end",
@@ -117,6 +171,12 @@
         "jeudi":false,
         "vendredi":false,
         "samedi":false
+    },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
     },
     "id":"M204"
 },{
@@ -130,6 +190,12 @@
         "vendredi":false,
         "samedi":false
     },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
+    },
     "id":"M205"
 },{
     "matiere":"Création d'une application Cloud native",
@@ -141,6 +207,12 @@
         "jeudi":false,
         "vendredi":false,
         "samedi":false
+    },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
     },
     "id":"M206"
 },{
@@ -154,6 +226,12 @@
         "vendredi":false,
         "samedi":false
     },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
+    },
     "id":"M207"
 },{
     "matiere":"Intégration du milieu professionnel",
@@ -165,6 +243,12 @@
         "jeudi":false,
         "vendredi":false,
         "samedi":false
+    },
+    "seances":{
+        "1":false,
+        "2":false,
+        "3":false,
+        "4":false
     },
     "id":"M208"
 }
