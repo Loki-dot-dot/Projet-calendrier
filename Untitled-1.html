@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Weekly Schedule</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      background-color: #121212;
+      color: #f5f5f5;
+    }
+    .day-col {
+      border: 1px solid #333;
+      min-height: 150px;
+    }
+    .time-block {
+      border: 1px dashed #777;
+      margin: 6px;
+      padding: 12px;
+      border-radius: 10px;
+      min-height: 70px;
+      background-color: #1e1e1e;
+    }
+    .time-block small {
+      display: block;
+      font-size: 0.9rem;
+      color: #e0e0e0; /* brighter for visibility */
+      margin-bottom: 5px;
+    }
+    .subject {
+      background-color: #1976d2; /* strong blue */
+      color: #fff; /* white text */
+      border-radius: 8px;
+      padding: 8px;
+      text-align: center;
+      font-weight: 600;
+      font-size: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+    }
+  </style>
+</head>
+<body class="container py-4">
+
+  <h1 class="text-center mb-4">Weekly Schedule</h1>
+  <div class="row row-cols-7 g-2" id="schedule"></div>
+
+  <script>
+    // Hypothetical subjects JSON
+    const subjects = [
+      { id: 1, name: "Data Analysis" },
+      { id: 2, name: "Web Development" },
+      { id: 3, name: "Mathematics" },
+      { id: 4, name: "Machine Learning" },
+      { id: 5, name: "Communication Skills" }
+    ];
+
+    // Hypothetical schedule JSON
+    const scheduleData = [
+      { subjectId: 1, day: "Monday", blocks: [1, 2] },
+      { subjectId: 1, day: "Thursday", blocks: [3, 4] },
+      { subjectId: 2, day: "Tuesday", blocks: [2, 3] },
+      { subjectId: 3, day: "Wednesday", blocks: [1] },
+      { subjectId: 4, day: "Friday", blocks: [1] },
+      { subjectId: 5, day: "Friday", blocks: [2] },
+      { subjectId: 2, day: "Saturday", blocks: [4] },
+    ];
+
+    const days = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" ];
+
+    // Default 2h30 blocks
+    const defaultBlocks = [
+      "08:30 - 11:00",
+      "11:00 - 13:30",
+      "13:30 - 16:00",
+      "16:00 - 18:30"
+    ];
+
+    // Friday 2 × 4h blocks
+    const fridayBlocks = [
+      "08:30 - 10:30",
+      "10:30 - 12:30",
+      "15:00-17:00",
+      "17:00 - 19:00"
+    ];
+
+    const scheduleContainer = document.getElementById("schedule");
+
+    // Fuse consecutive blocks for same subject
+    function fuseBlocks(entries, blockTimes) {
+      const fused = [];
+      let i = 0;
+
+      while (i < blockTimes.length) {
+        const currentEntries = entries.filter(e => e.blocks.includes(i + 1));
+        if (currentEntries.length === 0) {
+          i++;
+          continue;
+        }
+
+        const subjId = currentEntries[0].subjectId;
+        let start = i;
+        let end = i;
+
+        // Extend if next block is same subject
+        while (
+          end + 1 < blockTimes.length &&
+          entries.some(e => e.blocks.includes(end + 2) && e.subjectId === subjId)
+        ) {
+          end++;
+        }
+
+        fused.push({
+          subjectId: subjId,
+          time: blockTimes[start] + " → " + blockTimes[end].split(" - ")[1]
+        });
+
+        i = end + 1;
+      }
+      return fused;
+    }
+
+    days.forEach(day => {
+      const col = document.createElement("div");
+      col.className = "col day-col p-2";
+
+      const title = document.createElement("h5");
+      title.className = "text-center mb-2";
+      title.textContent = day;
+      col.appendChild(title);
+
+      const blockTimes = (day === "Friday") ? fridayBlocks : defaultBlocks;
+
+      const dayEntries = scheduleData.filter(e => e.day === day);
+
+      const fusedBlocks = fuseBlocks(dayEntries, blockTimes);
+
+      fusedBlocks.forEach(fused => {
+        const block = document.createElement("div");
+        block.className = "time-block";
+
+        const subj = subjects.find(s => s.id === fused.subjectId);
+
+        block.innerHTML = `<small>${fused.time}</small>`;
+        if (subj) {
+          const subjectDiv = document.createElement("div");
+          subjectDiv.className = "subject mt-1";
+          subjectDiv.textContent = subj.name;
+          block.appendChild(subjectDiv);
+        }
+
+        col.appendChild(block);
+      });
+
+      scheduleContainer.appendChild(col);
+    });
+  </script>
+</body>
+</html>
